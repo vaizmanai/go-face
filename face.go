@@ -87,11 +87,11 @@ func (rec *Recognizer) recognize(imgData []byte, maxFaces int) (faces []Face, er
 
 	rDataLen := numFaces * rectLen
 	rDataPtr := unsafe.Pointer(ret.rectangles)
-	rData := (*[1 << 30]C.long)(rDataPtr)[:rDataLen:rDataLen]
+	rData := (*[256]C.long)(rDataPtr)[:rDataLen:rDataLen]
 
 	dDataLen := numFaces * descrLen
 	dDataPtr := unsafe.Pointer(ret.descriptors)
-	dData := (*[1 << 30]float32)(dDataPtr)[:dDataLen:dDataLen]
+	dData := (*[256]float32)(dDataPtr)[:dDataLen:dDataLen]
 
 	for i := 0; i < numFaces; i++ {
 		face := Face{}
